@@ -158,9 +158,7 @@ class Fight {
                 if(this.player.health <= 0)
                 {
                     this.player.dead = true;
-                    this.player.killed();
                 }
-            }
             }
             else
             {
@@ -176,9 +174,7 @@ class Fight {
                 if(this.player.health <= 0)
                 {
                     this.player.dead = true;
-                    this.player.killed();
                 }
-            }
             }
             this.attacking = false;
         }
