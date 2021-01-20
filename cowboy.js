@@ -129,37 +129,40 @@ class CowBoy {
     	this.BB = new BoundingBox(this.x, this.y, 62*2, 90*2);
     }
     update() {
-      if(this.timer == 0)
-      {
-        this.state = 0; 
-        this.facing = 0;
-        this.fire = 0;
-        this.attacking = false;
+      if(!this.dead)
+        {
+        if(this.timer == 0)
+        {
+          this.state = 0; 
+          this.facing = 0;
+          this.fire = 0;
+          this.attacking = false;
+        }
+        else
+        {
+          this.timer --;
+        }
+        if(!this.onGround)
+        {
+            this.velocity.y += this.gravity;
+        }
+        if(this.game.interact)
+        {
+          //this.attack();
+        }
+          //collision
+          var that = this;
+          this.game.entities.forEach(function (entity) {
+            if (entity.BB && that.BB.collide(entity.BB)) {
+              if(entity instanceof groundCen || entity instanceof groundRig || entity instanceof groundLeft && that.velocity.y != 0)
+                  {
+                      that.velocity.y = 0;
+                      //that.y = entity.y - 118;
+                      that.onGround = true;
+                  }
+            }
+          });
       }
-      else
-      {
-        this.timer --;
-      }
-       if(!this.onGround)
-       {
-          this.velocity.y += this.gravity;
-       }
-       if(this.game.interact)
-       {
-         //this.attack();
-       }
-        //collision
-        var that = this;
-        this.game.entities.forEach(function (entity) {
-        	if (entity.BB && that.BB.collide(entity.BB)) {
-            if(entity instanceof groundCen || entity instanceof groundRig || entity instanceof groundLeft && that.velocity.y != 0)
-                {
-                    that.velocity.y = 0;
-                    //that.y = entity.y - 118;
-                    that.onGround = true;
-                }
-          }
-        });
         if(!this.dead)
         {
           this.updateBB();
