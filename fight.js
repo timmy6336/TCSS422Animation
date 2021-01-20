@@ -155,6 +155,11 @@ class Fight {
                 }
                 gameEngine.addEntity(new Crit(gameEngine,this.enemy.x,this.enemy.y));
                 this.crit = false;
+                if(this.player.health <= 0)
+                {
+                    this.player.dead = true;
+                }
+            }
             }
             else
             {
@@ -167,6 +172,11 @@ class Fight {
                 {
                     this.player.health -= 5;
                 }
+                if(this.player.health <= 0)
+                {
+                    this.player.dead = true;
+                }
+            }
             }
             this.attacking = false;
         }
